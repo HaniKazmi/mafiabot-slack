@@ -4,8 +4,7 @@ class Event
 		event = JSON.parse data
 		if event["type"]
 			@type = event["type"].to_sym
-			State.users[event["user"]] ||= User.new event["user"]
-			@user = State.users[event["user"]]
+			@user = State.users[event["user"]] ||= User.new(event["user"])
 			@text = event["text"]
 		end
 	end

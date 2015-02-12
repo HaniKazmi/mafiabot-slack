@@ -6,11 +6,8 @@ require_relative 'mafia-bot/user'
 require_relative 'mafia-bot/logic'
 require_relative 'mafia-bot/states/states'
 
-url = get_url State.token
-
 EM.run {
-  ws = Faye::WebSocket::Client.new(url)
-  State.ws = ws
+  State.ws = ws = Faye::WebSocket::Client.new(get_url)
   logic = Logic.new
 
   ws.on :open do |event|
@@ -21,7 +18,6 @@ EM.run {
     data = Event.new event.data
     p [:message, event.data]
     logic.new_event data
-    	#ws.send('{"id": 1,"type": "message","channel": "C03LB019E","text": "Hello world"}')
   end
 
   ws.on :close do |event|

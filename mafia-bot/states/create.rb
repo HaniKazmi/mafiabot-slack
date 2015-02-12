@@ -24,7 +24,9 @@ class Create
 			puts "There are #{@mafia.count} mafia members."
 			State.send "There are #{@players.count} players"
 			State.send "#{@mafia.count} of them is a mafia member."
-			State.send "You are a mafia member", @mafia[0].channel
+			@mafia.each do |player|
+				State.send "You are a mafia member", player.channel
+			end
 			@delegate.change_state Night.new @delegate, @players, @mafia
 		end
 	end

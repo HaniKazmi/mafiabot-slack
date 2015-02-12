@@ -10,7 +10,7 @@ class Logic
 	end
 
 	def new_message message, user
-		if message.start_with? 'm'
+		if message and message.start_with? 'm'
 			command = message.split(" ")[1..-1]
 			@state.command_received command, user
 		end

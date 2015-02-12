@@ -1,9 +1,8 @@
 require 'net/http'
 require 'json'
 
-def get_url token
-    url = 'https://slack.com/api'
-    req = Net::HTTP.post_form URI(url + '/rtm.start'), token: token
+def get_url
+    req = Net::HTTP.post_form URI(State.url + '/rtm.start'), token: State.token
     body = JSON.parse req.body
     body['url']
 end
